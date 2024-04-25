@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luispichiya.controller.MenuClientesController">
+   <children>
+      <ImageView fitHeight="603.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Menú%20clientes.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblClientes" layoutX="61.0" layoutY="135.0" prefHeight="330.0" prefWidth="746.0">
+        <columns>
+          <TableColumn fx:id="colClienteId" prefWidth="84.0" text="clienteId" />
+          <TableColumn fx:id="colNombre" prefWidth="140.0" text="nombre" />
+            <TableColumn fx:id="colApellido" prefWidth="131.0" text="apellido" />
+            <TableColumn fx:id="colTelefono" prefWidth="104.0" text="telefono" />
+            <TableColumn fx:id="colDireccion" prefWidth="140.0" text="direccion" />
+            <TableColumn fx:id="colNit" prefWidth="100.0" text="nit" />
+        </columns>
+      </TableView>
+      <GridPane alignment="CENTER" layoutX="818.0" layoutY="188.0" prefHeight="144.0" prefWidth="192.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnAgregar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Agregar" />
+            <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Eliminar" GridPane.rowIndex="1" />
+            <Button fx:id="btnEditar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Editar" GridPane.columnIndex="1" />
+            <Button fx:id="btnReportar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Reportar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnRegresar" layoutX="186.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Regresar" />
+      <TextField fx:id="tfClienteId" layoutX="453.0" layoutY="92.0" prefHeight="25.0" prefWidth="294.0" promptText="Ingrese el ID del Cliente" />
+      <Button fx:id="btnBuscar" layoutX="759.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="36.0">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/iconoBuscar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
