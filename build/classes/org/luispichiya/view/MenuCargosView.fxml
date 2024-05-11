@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.luispichiya.controller.MenuCargosController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/MenuCargos.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfCargosId" editable="false" layoutX="25.0" layoutY="153.0" prefHeight="25.0" prefWidth="200.0" promptText="Cargo ID" />
+      <TextField fx:id="tfNombreCargo" layoutX="25.0" layoutY="222.0" prefHeight="25.0" prefWidth="200.0" promptText="Ingrese el nombre del Cargo" />
+      <TextArea fx:id="taDescripcion" layoutX="25.0" layoutY="295.0" prefHeight="101.0" prefWidth="290.0" promptText="Máximo de 100 letras." wrapText="true" />
+      <TableView fx:id="tblCargos" layoutX="333.0" layoutY="192.0" prefHeight="288.0" prefWidth="622.0">
+        <columns>
+          <TableColumn fx:id="colCargoId" prefWidth="100.0" text="cargoId" />
+          <TableColumn fx:id="colNombreCargo" prefWidth="261.0" text="nombreCargo" />
+            <TableColumn fx:id="colDescripcionCargo" prefWidth="261.0" text="descripcionCargo" />
+        </columns>
+      </TableView>
+      <TextField fx:id="tfCargoId" layoutX="614.0" layoutY="153.0" prefHeight="25.0" prefWidth="294.0" promptText="Ingrese el ID del Cargo" />
+      <Button fx:id="btnBuscar" layoutX="917.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="36.0">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/iconoBuscar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <GridPane alignment="CENTER" layoutX="32.0" layoutY="424.0" prefHeight="112.0" prefWidth="276.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnGuardar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
+            <Button fx:id="btnVaciar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Vaciar" GridPane.columnIndex="1" />
+            <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Eliminar" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnRegresar" alignment="CENTER" layoutX="130.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Regresar" />
+   </children>
+</AnchorPane>

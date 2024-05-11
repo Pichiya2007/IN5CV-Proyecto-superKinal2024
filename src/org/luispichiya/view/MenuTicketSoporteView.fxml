@@ -14,14 +14,14 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/A.png" />
+            <Image url="@../image/FondoMenuTicketSoporte.png" />
          </image>
       </ImageView>
       <TextField fx:id="tfTicketId" editable="false" layoutX="61.0" layoutY="170.0" prefHeight="25.0" prefWidth="200.0" promptText="Ticket ID" />
       <TextArea fx:id="taDescripcion" layoutX="61.0" layoutY="245.0" prefHeight="126.0" prefWidth="255.0" wrapText="true" />
       <ComboBox fx:id="cmbClientes" layoutX="395.0" layoutY="170.0" prefHeight="25.0" prefWidth="200.0" />
       <ComboBox fx:id="cmbFacturas" layoutX="706.0" layoutY="170.0" prefHeight="25.0" prefWidth="200.0" />
-      <TableView fx:id="tblTickets" layoutX="333.0" layoutY="226.0" prefHeight="289.0" prefWidth="622.0">
+      <TableView fx:id="tblTickets" layoutX="333.0" layoutY="226.0" onMouseClicked="#cargarDatosEditar" prefHeight="289.0" prefWidth="622.0">
         <columns>
           <TableColumn fx:id="colTicketId" prefWidth="75.0" text="TicketId" />
           <TableColumn fx:id="colDescripcion" prefWidth="185.0" text="Descripcion" />
@@ -31,7 +31,8 @@
         </columns>
       </TableView>
       <Button fx:id="btnRegresar" layoutX="121.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Regresar" />
-      <Button fx:id="btnGuardar" layoutX="32.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
+      <Button fx:id="btnGuardar" layoutX="61.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
       <ComboBox fx:id="cmbEstatus" layoutX="61.0" layoutY="410.0" prefHeight="25.0" prefWidth="200.0" />
+      <Button fx:id="btnVaciar" layoutX="161.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Vaciar" />
    </children>
 </AnchorPane>
