@@ -16,13 +16,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.luispichiya.controller.FormClientesController;
 import org.luispichiya.controller.FormDistribuidoresController;
+import org.luispichiya.controller.FormEmpleadosController;
 import org.luispichiya.controller.MenuCargosController;
 import org.luispichiya.controller.MenuCategoriaProductoController;
 import org.luispichiya.controller.MenuClientesController;
 import org.luispichiya.controller.MenuDistribuidoresController;
+import org.luispichiya.controller.MenuEmpleadosController;
+import org.luispichiya.controller.MenuFacturaController;
 import org.luispichiya.controller.MenuPrincipalController;
 import org.luispichiya.controller.MenuPromocionController;
 import org.luispichiya.controller.MenuTicketSoporteController;
+import org.luispichiya.view.MenuProductoController;
 
 /**
  *
@@ -143,6 +147,47 @@ public class Main extends Application {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }     
+    }
+    
+    public void menuProductosView(){
+        try{
+            MenuProductoController menuProductoView = (MenuProductoController)switchScene("MenuProductoView.fxml", 1280, 870);
+            menuProductoView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }     
+    }
+    
+    public void menuEmpleadosView(){
+        try{
+            MenuEmpleadosController menuEmpleadosView = (MenuEmpleadosController)switchScene("MenuEmpleadosView.fxml", 1100, 600);
+            menuEmpleadosView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }      
+    }
+    
+    public void formEmpleadosView(int op){
+        try{
+            FormEmpleadosController formEmpleadosView = (FormEmpleadosController)switchScene("FormEmpleadosView.fxml", 500, 750);
+            formEmpleadosView.setOp(op);
+            formEmpleadosView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuFacturasView(){
+        try{
+            MenuFacturaController MenuFacturaView = (MenuFacturaController)switchScene("MenuFacturaView.fxml", 1100, 600);
+            MenuFacturaView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }       
     }
     
     /**

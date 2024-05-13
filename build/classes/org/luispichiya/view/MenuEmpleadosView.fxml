@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -11,15 +12,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.luispichiya.controller.MenuEmpleadosController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luispichiya.controller.MenuEmpleadosController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/MenuEmpleados.png" />
+            <Image url="@../image/MenuEmpleado.png" />
          </image>
       </ImageView>
-      <GridPane alignment="CENTER" layoutX="818.0" layoutY="188.0" prefHeight="144.0" prefWidth="192.0">
+      <GridPane alignment="CENTER" layoutX="14.0" layoutY="327.0" prefHeight="144.0" prefWidth="200.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -32,29 +32,24 @@
             <Button fx:id="btnAgregar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Agregar" />
             <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Eliminar" GridPane.rowIndex="1" />
             <Button fx:id="btnEditar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Editar" GridPane.columnIndex="1" />
-            <Button fx:id="btnReportar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Reportar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnVaciar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Vaciar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="tblEmpleados" layoutX="61.0" layoutY="135.0" prefHeight="330.0" prefWidth="746.0">
+      <TableView fx:id="tblEmpleados" layoutX="333.0" layoutY="192.0" prefHeight="288.0" prefWidth="622.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="colEmpleadoId" prefWidth="75.0" text="empleadoId" />
+          <TableColumn fx:id="colNombreEmpleado" prefWidth="85.0" text="nombre" />
+            <TableColumn fx:id="colApellidoEmpleado" prefWidth="85.0" text="apellido" />
+            <TableColumn fx:id="colSueldo" prefWidth="70.0" text="sueldo" />
+            <TableColumn fx:id="colHoraEntrada" prefWidth="77.0" text="horaEntrada" />
+            <TableColumn fx:id="colHoraSalida" prefWidth="82.0" text="horaSalida" />
+            <TableColumn fx:id="colCargo" prefWidth="68.0" text="cargo" />
+            <TableColumn fx:id="colEncargado" prefWidth="79.0" text="encargado" />
         </columns>
       </TableView>
-      <TextField fx:id="tfEmpleadoId" layoutX="453.0" layoutY="92.0" prefHeight="25.0" prefWidth="294.0" promptText="Ingrese el ID del Cliente" />
-      <Button fx:id="btnBuscar" layoutX="759.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="36.0">
-         <graphic>
-            <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/iconoBuscar.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ImageView fitHeight="23.0" fitWidth="22.0" layoutX="10.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/iconoBuscar.png" />
-         </image>
-      </ImageView>
+      <ComboBox fx:id="cmbEncargadoId" layoutX="25.0" layoutY="144.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="tfEmpleadoId" editable="false" layoutX="25.0" layoutY="211.0" prefHeight="25.0" prefWidth="200.0" promptText="Empleado ID" />
+      <Button fx:id="btnGuardar" alignment="CENTER" layoutX="25.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
+      <Button fx:id="btnRegresar" alignment="CENTER" layoutX="114.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="250.0" text="Regresar" />
    </children>
 </AnchorPane>

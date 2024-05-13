@@ -14,35 +14,34 @@ import java.time.LocalDate;
 public class Promocion {
     
     private int promocionId;
-    private double precioPromocion;
-    private String descripcionPromocion;
+    private String precio;
+    private String descripcion;
     private String fechaInicio;
     private String fechaFinalizacion;
-    private String promocion;
     private int productoId;
+    private String producto;
 
     public Promocion() {
     }
 
-    public Promocion(int promocionId, double precioPromocion, String descripcionPromocion, String fechaInicio, String fechaFinalizacion, String promocion, int productoId) {
+    public Promocion(int promocionId, String precio, String descripcion, String fechaInicio, String fechaFinalizacion, int productoId) {
         this.promocionId = promocionId;
-        this.precioPromocion = precioPromocion;
-        this.descripcionPromocion = descripcionPromocion;
+        this.precio = precio;
+        this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFinalizacion = fechaFinalizacion;
-        this.promocion = promocion;
         this.productoId = productoId;
     }
 
-    public Promocion(int promocionId, double precioPromocion, String descripcionPromocion, String fechaInicio, String fechaFinalizacion, String promocion) {
+    public Promocion(int promocionId, String precio, String descripcion, String fechaInicio, String fechaFinalizacion, String producto) {
         this.promocionId = promocionId;
-        this.precioPromocion = precioPromocion;
-        this.descripcionPromocion = descripcionPromocion;
+        this.precio = precio;
+        this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
         this.fechaFinalizacion = fechaFinalizacion;
-        this.promocion = promocion;
+        this.producto = producto;
     }
-    
+
     public int getPromocionId() {
         return promocionId;
     }
@@ -51,20 +50,20 @@ public class Promocion {
         this.promocionId = promocionId;
     }
 
-    public double getPrecioPromocion() {
-        return precioPromocion;
+    public String getPrecio() {
+        return precio;
     }
 
-    public void setPrecioPromocion(double precioPromocion) {
-        this.precioPromocion = precioPromocion;
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
 
-    public String getDescripcionPromocion() {
-        return descripcionPromocion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripcionPromocion(String descripcionPromocion) {
-        this.descripcionPromocion = descripcionPromocion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getFechaInicio() {
@@ -83,19 +82,24 @@ public class Promocion {
         this.fechaFinalizacion = fechaFinalizacion;
     }
 
-    public String getPromocion() {
-        return promocion;
-    }
-
-    public void setPromocion(String promocion) {
-        this.promocion = promocion;
-    }
-
     public int getProductoId() {
         return productoId;
     }
 
     public void setProductoId(int productoId) {
         this.productoId = productoId;
+    }
+
+    public String getProducto() {
+        return producto;
+    }
+
+    public void setProducto(String producto) {
+        this.producto = producto;
+    }
+
+    @Override
+    public String toString() {
+        return "Promocion{" + "promocionId=" + promocionId + ", precio=" + precio + ", descripcion=" + descripcion + ", fechaInicio=" + fechaInicio + ", fechaFinalizacion=" + fechaFinalizacion + ", productoId=" + productoId + ", producto=" + producto + '}';
     }  
 }

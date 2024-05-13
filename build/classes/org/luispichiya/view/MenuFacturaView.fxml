@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.luispichiya.controller.MenuFacturaController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/MenuFacturas.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfFacturaId" editable="false" layoutX="25.0" layoutY="155.0" prefHeight="25.0" prefWidth="200.0" promptText="Factura ID" />
+      <ComboBox fx:id="cmbClienteId" layoutX="25.0" layoutY="226.0" prefHeight="25.0" prefWidth="200.0" />
+      <ComboBox fx:id="cmbEmpleadoId" layoutX="25.0" layoutY="300.0" prefHeight="25.0" prefWidth="200.0" />
+      <TableView fx:id="tblFacturas" layoutX="333.0" layoutY="192.0" prefHeight="288.0" prefWidth="622.0">
+        <columns>
+          <TableColumn fx:id="colFacturaId" prefWidth="75.0" text="facturaId" />
+          <TableColumn fx:id="colFecha" prefWidth="124.0" text="fecha" />
+            <TableColumn fx:id="colHora" prefWidth="129.0" text="hora" />
+            <TableColumn fx:id="colClienteId" prefWidth="108.0" text="clienteId" />
+            <TableColumn fx:id="colEmpleadoId" prefWidth="96.0" text="empleadoId" />
+            <TableColumn fx:id="colTotal" prefWidth="89.0" text="total" />
+        </columns>
+      </TableView>
+      <GridPane alignment="CENTER" layoutX="14.0" layoutY="336.0" prefHeight="144.0" prefWidth="290.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnGuardar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
+            <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Eliminar" GridPane.columnIndex="1" />
+            <Button fx:id="btnVaciar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Vaciar" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnRegresar" alignment="CENTER" layoutX="125.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="250.0" text="Regresar" />
+   </children>
+</AnchorPane>

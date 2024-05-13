@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="870.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luispichiya.view.MenuProductoController">
+   <children>
+      <ImageView fitHeight="870.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/MenuProducto.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfProductoId" editable="false" layoutX="854.0" layoutY="161.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="tfNombreProducto" layoutX="854.0" layoutY="229.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="tfStock" layoutX="854.0" layoutY="298.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="tfUnidad" layoutX="854.0" layoutY="371.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="tfMayor" layoutX="854.0" layoutY="442.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="tfCompra" layoutX="854.0" layoutY="513.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextArea fx:id="taDescripcionProducto" layoutX="1118.0" layoutY="151.0" prefHeight="103.0" prefWidth="148.0" wrapText="true" />
+      <ComboBox fx:id="cmbDistribuidores" layoutX="1117.0" layoutY="298.0" prefWidth="150.0" />
+      <ComboBox fx:id="cmbCategorias" layoutX="1117.0" layoutY="371.0" prefWidth="150.0" />
+      <ImageView fx:id="imgCargar" fitHeight="225.0" fitWidth="239.0" layoutX="934.0" layoutY="613.0" onDragDropped="#handleOnDrop" onDragOver="#handleOnDrag" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/IconoArrastrar.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblProductos" layoutX="39.0" layoutY="448.0" prefHeight="330.0" prefWidth="746.0">
+         <columns>
+            <TableColumn fx:id="colProductoId" prefWidth="72.0" text="productoId" />
+            <TableColumn fx:id="colNombre" prefWidth="109.0" text="nombre" />
+            <TableColumn fx:id="colDescripcion" prefWidth="131.0" text="descripción" />
+            <TableColumn fx:id="colStock" prefWidth="68.0" text="stock" />
+            <TableColumn fx:id="colUnidad" prefWidth="73.0" text="\$ Unidad" />
+            <TableColumn fx:id="colMayor" prefWidth="75.0" text="\$ Mayor" />
+            <TableColumn fx:id="colDistribuidor" prefWidth="111.0" text="Distribuidor" />
+            <TableColumn fx:id="colCategoria" prefWidth="106.0" text="Categoría" />
+            <TableColumn fx:id="colNit3" prefWidth="254.0" text="nit" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnRegresar" layoutX="132.0" layoutY="797.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Regresar" />
+      <TextField fx:id="tfProductoId" layoutX="435.0" layoutY="384.0" prefHeight="25.0" prefWidth="294.0" promptText="Ingrese el ID del Producto" />
+      <Button fx:id="btnBuscar" layoutX="747.0" layoutY="378.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="36.0">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/iconoBuscar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnGuardar" layoutX="1186.0" layoutY="680.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
+      <Button fx:id="btnEliminar" layoutX="659.0" layoutY="797.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="126.0" text="Eliminar" />
+      <ImageView fx:id="imgMostrar" fitHeight="261.0" fitWidth="300.0" layoutX="85.0" layoutY="180.0" onDragDropped="#handleOnDrop" onDragOver="#handleOnDrag" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

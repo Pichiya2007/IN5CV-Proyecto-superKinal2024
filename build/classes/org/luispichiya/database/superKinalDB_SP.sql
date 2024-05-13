@@ -162,7 +162,12 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_listarProductos()
 BEGIN
-    SELECT * FROM Productos;
+    SELECT P.productoId, P.nombreProducto, P.descripcionProducto, P.cantidadStock, P.precioVentaUnitario, P.precioVentaMayor,
+        CONCAT('Id:', D.distribuidorId,'','Nombre:',D.nombreDistribuidor,'')AS 'Distribuidor',
+		CONCAT('Id:', C.categoriaProductoId,'','Nombre:',C.nombreCategoria,'')AS 'Categoria'
+		FROM Productos P
+        join Distribuidores D on P.distribuidorId = D.distribuidorId
+		join CategoriaProductos C on P.categoriaProductoId = C.categoriaProductoId;
 END $$
 DELIMITER ;
 
@@ -516,13 +521,15 @@ BEGIN
 END $$
 DELIMITER ;
 
+call sp_agregarPromocion();
+
 -- LISTAR
 DELIMITER $$
 CREATE PROCEDURE sp_listarPromociones()
 BEGIN
-    SELECT P.promocionId,  P.precioPromocion, P.descripcionPromocion, P.fechaInicio, P.fechaFinalizacion,
-    CONCAT('Id: ', Pr.productoId, ' | ' , Pr.nombreProducto) AS 'producto' from Promociones P
-    JOIN Productos Pr on P.productoId = Pr.productoId;
+    select PS.promocionId, PS.precioPromocion, PS.descripcionPromocion, PS.fechaInicio, PS.fechaFinalizacion,  
+			P.nombreProducto from Promociones PS
+            join Productos P on PS.productoId = P.productoId;
 END $$
 DELIMITER ;
 
