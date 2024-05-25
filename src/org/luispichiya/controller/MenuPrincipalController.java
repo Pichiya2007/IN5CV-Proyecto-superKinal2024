@@ -18,11 +18,11 @@ import org.luispichiya.system.Main;
  * @author Luis Pichiya
  */
 public class MenuPrincipalController implements Initializable {
+    
     private Main stage;
     
     @FXML
-    MenuItem btnMenuClientes, btnTicketSoporte;
-    
+    MenuItem btnMenuClientes, btnTicketSoporte, btnCargos, btnDistribuidor, btnCategoriaProducto, btnPromociones, btnProducto, btnEmpleados, btnFacturas;  
     @Override
     public void initialize(URL location, ResourceBundle resources){
     
@@ -42,6 +42,20 @@ public class MenuPrincipalController implements Initializable {
             stage.menuClientesView();
         }else if(event.getSource() == btnTicketSoporte){
             stage.menuTicketSoporteView();
+        }else if (event.getSource() == btnCargos){
+            stage.menuCargosView();
+        }else if(event.getSource() == btnDistribuidor){
+            stage.menuDistribuidorView();
+        }else if(event.getSource() == btnCategoriaProducto){
+            stage.menuCategoriaProductoView();
+        }else if(event.getSource() == btnPromociones){
+            stage.menuPromocionesView();
+        }else if(event.getSource() == btnProducto){
+            stage.menuProductosView();
+        }else if(event.getSource() == btnEmpleados){
+            stage.menuEmpleadosView();
+        }else if(event.getSource() == btnFacturas){
+            stage.menuFacturasView();
         }
     }
 }

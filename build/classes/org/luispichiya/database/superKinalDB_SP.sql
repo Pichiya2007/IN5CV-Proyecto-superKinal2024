@@ -1,82 +1,292 @@
 use superKinalDB;
+-- Agregar Usuario
 
--- *********************** CRUD Cliente ************************** --
 DELIMITER $$
-create procedure sp_agregarClientes(nom varchar(30), ape varchar(30), tel varchar(15), dir varchar(150), nit varchar(15))
+CREATE PROCEDURE sp_agregarUsuario(us varchar(30), con varchar(100), nivAccId int, empId int)
+	BEGIN
+		INSERT INTO Usuarios(usuario, contrasenia, nivelAccesoId, empleadoId)
+			VALUES(us, con, nivAccId, empId);
+	END $$
+DELIMITER ;
+
+-- Buscar Usuario 
+DELIMITER $$
+CREATE PROCEDURE sp_buscarUsuario(us varchar(30))
+	BEGIN
+		SELECT * FROM Usuarios
+			where usuario = us;
+	END $$
+DELIMITER ;
+
+call sp_buscarUsuario('lpichiya');
+
+DELIMITER $$
+CREATE PROCEDURE sp_listarNivelAcceso()
+	BEGIN
+		SELECT * FROM NivelesAcceso;
+    END $$
+DELIMITER ;
+
+call sp_listarNivelAcceso();
+
+-- ----------------- CRUD ----------------- --
+-- ******** Cargos ******** --
+DELIMITER $$
+CREATE PROCEDURE sp_agregarCargo(nom varchar(30),des varchar(100))
 BEGIN
-	insert into Clientes(nombre, apellido, telefono, direccion, nit) values
-		(nom, ape, tel, dir, nit);
+    INSERT INTO Cargos(nombreCargo, descripcionCargo)
+    VALUES (nom, des);
 END $$
 DELIMITER ;
 
-CALL sp_agregarClientes();
-
--- Listar
 DELIMITER $$
-create procedure sp_ListarClientes()
-	BEGIN
-		select
-			Clientes.clienteId,
-            Clientes.nombre,
-            Clientes.apellido,
-            Clientes.telefono,
-            Clientes.direccion,
-            Clientes.nit
-            from Clientes;
-    END $$
+CREATE PROCEDURE sp_listarCargos()
+BEGIN
+    SELECT * FROM Cargos;
+END $$
 DELIMITER ;
-            
-CALL sp_ListarClientes();
 
--- Eliminar
+
 DELIMITER $$
-create procedure sp_EliminarClientes(cliId INT)
-	BEGIN
-		delete
-			from Clientes
+CREATE PROCEDURE sp_eliminarCargo(carId int)
+BEGIN
+    DELETE FROM Cargos WHERE cargoId = carId;
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_buscarCargo(carId int)
+BEGIN
+    SELECT * FROM Cargos WHERE cargoId = carId;
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_editarCargo(carId int,nom varchar(30),des varchar(100))
+BEGIN
+    UPDATE Cargos
+    SET
+        nombreCargo = nom,
+        descripcionCargo = des
+    WHERE cargoId = carId;
+END $$
+DELIMITER ;
+
+-- ******** Empleados ******** --
+DELIMITER $$
+CREATE PROCEDURE sp_agregarEmpleado(nom varchar(30),ape varchar(30),sue decimal(10,2),he time,hs time,carId int)
+BEGIN
+    INSERT INTO Empleados(nombreEmpleado, apellidoEmpleado, sueldo, horaEntrada, horaSalida, cargoId)
+    VALUES (nom, ape, sue, he, hs, carId);
+END $$
+DELIMITER ;
+
+-- CALL sp_agregarEmpleado('Marlon','Adonai', 20.00,'04:00:00', '06:00:00',1);
+
+DELIMITER $$
+CREATE PROCEDURE sp_listarEmpleados()
+BEGIN
+    SELECT 
+        EP.empleadoId, EP.nombreEmpleado, EP.apellidoEmpleado, EP.sueldo, EP.horaEntrada, EP.horaSalida, 
+        CONCAT('Id: ', C.cargoId, ' | ', C.nombreCargo, ': ', C.descripcionCargo) AS 'cargo',
+        CONCAT('Id: ', E.empleadoId, ' | ', E.nombreEmpleado ,' ', e.apellidoEmpleado) AS 'encargado' 
+    FROM Empleados EP
+    JOIN Cargos C ON EP.cargoId = C.cargoId
+    LEFT JOIN Empleados E ON EP.encargadoId = E.empleadoId;
+END $$
+DELIMITER ;
+call sp_listarEmpleados();
+
+DELIMITER $$
+CREATE PROCEDURE sp_eliminarEmpleado(empId int)
+BEGIN
+    DELETE FROM Empleados WHERE empleadoId = empId;
+END $$
+DELIMITER ;
+
+-- call sp_eliminarEmpleado(2);
+
+select * from 
+DELIMITER $$
+CREATE PROCEDURE sp_buscarEmpleado(empId int)
+BEGIN
+    SELECT * FROM Empleados WHERE empleadoId = empId;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE sp_editarEmpleado(empId int,nom varchar(30),ape varchar(30),sue decimal(10,2),he time,hs time,carId int)
+BEGIN
+    UPDATE Empleados
+    SET
+        nombreEmpleado = nom,
+        apellidoEmpleado = ape,
+        sueldo = sue,
+        horaEntrada = he,
+        horaSalida = hs,
+        cargoId  = carId
+    WHERE empleadoId = empId;
+END $$
+DELIMITER ;
+
+-- ******** Clientes ******** --
+DELIMITER $$	
+create procedure sp_agregarCliente(nom varchar(30), ape varchar(30), tel varchar(15), dir varchar(150), nit varchar(15))
+begin
+	insert into Clientes(nombre, apellido, telefono, direccion, nit) values
+		(nom, ape, tel, dir, nit);
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_listarclientes()
+begin
+	select * from clientes;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_eliminarCliente(cliId int)
+begin
+	delete from Clientes
+		where clienteId = cliId;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_buscarCliente(cliId int)
+begin
+	select * from Clientes
+		where clienteId = cliId;
+end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_editarCliente(cliId int, nom varchar(30), ape varchar(30), tel varchar(15), dir varchar(150), nt varchar(15))
+begin
+	update Clientes set
+		nombre = nom,
+        apellido = ape,
+        telefono = tel,
+        direccion = dir,
+        nit = nt
 			where clienteId = cliId;
-    END $$
+end $$
 DELIMITER ;
 
-CALL sp_EliminarClientes();
 
--- Buscar
+-- ******** Facturas ******** --
 DELIMITER $$
-create procedure sp_BuscarCliente(cliId INT)
-	BEGIN
-		select 
-			Clientes.clienteId,
-            Clientes.nombre,
-            Clientes.apellido,
-            Clientes.telefono,
-            Clientes.direccion,
-            Clientes.nit
-            from Clientes
-            where clienteId = cliId;
-    END $$
+CREATE PROCEDURE sp_agregarFactura(cliId int,empId int)
+BEGIN
+    INSERT INTO Facturas(fecha, hora, clienteId, empleadoId)
+    VALUES (DATE(NOW()), TIME(NOW()), cliId, empId);
+END $$
 DELIMITER ;
 
-CALL sp_BuscarCliente();
-
--- Editar
 DELIMITER $$
-create procedure sp_EditarCliente(cliId INT, nom varchar(30), ape varchar(30), tel varchar(15), dir varchar(150), nit varchar(15))
-	BEGIN
-		update Clientes
-			set
-				nombre = nom,
-                apellido = ape,
-                telefono = tel,
-                direccion = dir,
-                nit = nit
-                where clienteId = cliId;
-    END $$
+CREATE PROCEDURE sp_listarFacturas()
+BEGIN
+    SELECT F.facturaId, F.fecha, F.hora,
+	CONCAT('Id: ', C.clienteId, ' | ', C.nombre, ' ', C.apellido) AS 'cliente',
+	CONCAT('Id: ', E.empleadoId, ' | ', E.nombreEmpleado ,' ', e.apellidoEmpleado) AS 'empleado',
+    F.total from Facturas F
+    JOIN Clientes C on F.clienteId = C.clienteId
+    JOIN Empleados E on F.empleadoId = E.empleadoId;
+END $$
 DELIMITER ;
 
-CALL sp_EditarCliente();
+DELIMITER $$
+CREATE PROCEDURE sp_eliminarFactura(facId int)
+BEGIN
+    DELETE FROM Facturas WHERE facturaId = facId;
+END $$
+DELIMITER ;
 
--- *********************** CRUD Distribuidores ************************** --
--- AGREGAR
+DELIMITER $$
+CREATE PROCEDURE sp_buscarFactura(facId int)
+BEGIN
+    SELECT * FROM Facturas WHERE facturaId = facId;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE sp_editarFactura(facId int,cliId int,empId int)
+BEGIN
+    UPDATE Facturas
+    SET
+        clienteId = cliId,
+        empleadoId = empId
+    WHERE facturaId = facId;
+END $$
+DELIMITER ;
+
+
+-- ************* Asignar total *********** --
+DELIMITER $$
+CREATE PROCEDURE sp_editarTotalFactura(facId int, tot decimal(10,2))
+BEGIN
+    UPDATE Facturas
+    SET
+		total = tot
+    WHERE facturaId = facId;
+END $$
+DELIMITER ;
+
+
+-- ******** TicketSoporte ******** --
+DELIMITER $$
+CREATE PROCEDURE sp_agregarTicketSoporte(des varchar(250), cliId int, facId int)
+BEGIN
+    INSERT INTO TicketSoporte(descripcionTicket, estatus, clienteId, facturaId)
+    VALUES (des, 'Recién Creado', cliId, facId);
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE sp_listarTicketsSoporte()
+BEGIN
+    select TS.ticketSoporteId, TS.descripcionTicket, TS.estatus,
+			CONCAT('Id: ', C.clienteId, ' | ', C.nombre, ' ', C.apellido) AS 'cliente',
+            TS.facturaId from TicketSoporte TS
+    join Clientes C on TS.clienteId = C.clienteId;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE sp_eliminarTicketSoporte(ticSopId int)
+BEGIN
+    DELETE FROM TicketSoporte WHERE ticketSoporteId = ticSopId;
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_buscarTicketSoporte(ticSopId int)
+BEGIN
+    SELECT * FROM TicketSoporte WHERE ticketSoporteId = ticSopId;
+END $$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_editarTicketSoporte(ticSopId int,des varchar(250),est varchar(30),cliId int,facId int)
+BEGIN
+    UPDATE TicketSoporte
+    SET
+        descripcionTicket = des,
+        estatus = est,
+        clienteId = cliId,
+        facturaId = facId
+    WHERE ticketSoporteId = ticSopId;
+END $$
+DELIMITER ;
+
+ 
+
+-- *********** Distribuidores ************ --
 DELIMITER $$
 CREATE PROCEDURE sp_agregarDistribuidor(nom varchar(30),dir varchar(200),nit varchar(15),tel varchar(15),web varchar(50))
 BEGIN
@@ -85,7 +295,6 @@ BEGIN
 END $$
 DELIMITER 
 
--- LISTAR
 DELIMITER $$
 CREATE PROCEDURE sp_listarDistribuidores()
 BEGIN
@@ -93,7 +302,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- ELIMINAR
 DELIMITER $$
 CREATE PROCEDURE sp_eliminarDistribuidor(disId int)
 BEGIN
@@ -101,7 +309,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- BUSCAR
 DELIMITER $$
 CREATE PROCEDURE sp_buscarDistribuidor(disId int)
 BEGIN
@@ -109,7 +316,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- EDITAR
 DELIMITER $$
 CREATE PROCEDURE sp_editarDistribuidor(disId int,nom varchar(30),dir varchar(200),nit varchar(15),tel varchar(15),web varchar(50))
 BEGIN
@@ -125,8 +331,7 @@ END $$
 DELIMITER ;
 
 
--- *********************** CRUD CategoriaProductos ************************** --
--- AGREGAR
+-- *********** Categoria Productos *********** --
 DELIMITER $$
 CREATE PROCEDURE sp_agregarCategoriaProducto(nom varchar(30),des varchar(100))
 BEGIN
@@ -135,7 +340,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- LISTAR
 DELIMITER $$
 CREATE PROCEDURE sp_listarCategoriaProductos()
 BEGIN
@@ -143,7 +347,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- ELIMINAR
+
 DELIMITER $$
 CREATE PROCEDURE sp_eliminarCategoriaProducto(catId int)
 BEGIN
@@ -151,7 +355,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- BUSCAR
+
 DELIMITER $$
 CREATE PROCEDURE sp_buscarCategoriaProducto(catId int)
 BEGIN
@@ -159,7 +363,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- EDITAR
 DELIMITER $$
 CREATE PROCEDURE sp_editarCategoriaProducto(catId int,nom varchar(30),des varchar(100))
 BEGIN
@@ -171,8 +374,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- *********************** CRUD Productos ************************** --
--- AGREGAR
+-- --- ************** Productos *************** --
 DELIMITER $$
 CREATE PROCEDURE sp_agregarProducto(nom varchar(50),des varchar(100),cant int,pvu decimal(10,2),pvm decimal(10,2),pc decimal(10,2),img BLOB,disId int,catId int)
 BEGIN
@@ -181,15 +383,18 @@ BEGIN
 END $$
 DELIMITER ;
 
--- LISTAR
 DELIMITER $$
 CREATE PROCEDURE sp_listarProductos()
 BEGIN
-    SELECT * FROM Productos;
+    SELECT P.productoId, P.nombreProducto, P.descripcionProducto, P.cantidadStock, P.precioVentaUnitario, P.precioVentaMayor,
+        CONCAT('Id:', D.distribuidorId,'','Nombre:',D.nombreDistribuidor,'')AS 'Distribuidor',
+		CONCAT('Id:', C.categoriaProductoId,'','Nombre:',C.nombreCategoria,'')AS 'Categoria'
+		FROM Productos P
+        join Distribuidores D on P.distribuidorId = D.distribuidorId
+		join CategoriaProductos C on P.categoriaProductoId = C.categoriaProductoId;
 END $$
 DELIMITER ;
 
--- ELIMINAR
 DELIMITER $$
 CREATE PROCEDURE sp_eliminarProducto(prodId int)
 BEGIN
@@ -197,7 +402,7 @@ BEGIN
 END $$
 DELIMITER ;
 
--- BUSCAR
+
 DELIMITER $$
 CREATE PROCEDURE sp_buscarProducto(prodId int)
 BEGIN
@@ -205,7 +410,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- EDITAR
 DELIMITER $$
 CREATE PROCEDURE sp_editarProducto(prodId int,nom varchar(50),des varchar(100),cant int,pvu decimal(10,2),pvm decimal(10,2),pc decimal(10,2),img BLOB,disId int,catId int)
 BEGIN
@@ -225,211 +429,7 @@ END $$
 DELIMITER ;
 
 
--- *********************** CRUD Cargo ************************** --
--- AGREGAR
-DELIMITER $$
-CREATE PROCEDURE sp_agregarCargo(nom varchar(30),des varchar(100))
-BEGIN
-    INSERT INTO Cargos(nombreCargo, descripcionCargo)
-    VALUES (nom, des);
-END $$
-DELIMITER ;
-
--- LISTAR
-DELIMITER $$
-CREATE PROCEDURE sp_listarCargos()
-BEGIN
-    SELECT * FROM Cargos;
-END $$
-DELIMITER ;
-
--- ELIMINAR
-DELIMITER $$
-CREATE PROCEDURE sp_eliminarCargo(cargoId int)
-BEGIN
-    DELETE FROM Cargos WHERE cargoId = cargoId;
-END $$
-DELIMITER ;
-
--- BUSCAR
-DELIMITER $$
-CREATE PROCEDURE sp_buscarCargo(cargoId int)
-BEGIN
-    SELECT * FROM Cargos WHERE cargoId = cargoId;
-END $$
-DELIMITER ;
-
--- EDITAR
-DELIMITER $$
-CREATE PROCEDURE sp_editarCargo(cargoId int,nom varchar(30),des varchar(100))
-BEGIN
-    UPDATE Cargos
-    SET
-        nombreCargo = nom,
-        descripcionCargo = des
-    WHERE cargoId = cargoId;
-END $$
-DELIMITER ;
-
-
--- *********************** CRUD Empleados ************************** --
--- AGREGAR
-DELIMITER $$
-CREATE PROCEDURE sp_agregarEmpleado(nom varchar(30),ape varchar(30),sue decimal(10,2),he time,hs time,carId int,encId int)
-BEGIN
-    INSERT INTO Empleados(nombreEmpleado, apellidoEmpleado, sueldo, horaEntrada, horaSalida, cargoId, encargadoId)
-    VALUES (nom, ape, sue, he, hs, carId, encId);
-END $$
-DELIMITER ;
-
--- LISTAR
-DELIMITER $$
-CREATE PROCEDURE sp_listarEmpleados()
-BEGIN
-    SELECT * FROM Empleados;
-END $$
-DELIMITER ;
-
--- ELIMINAR
-DELIMITER $$
-CREATE PROCEDURE sp_eliminarEmpleado(empId int)
-BEGIN
-    DELETE FROM Empleados WHERE empleadoId = empId;
-END $$
-DELIMITER ;
-
--- BUSCAR
-DELIMITER $$
-CREATE PROCEDURE sp_buscarEmpleado(empId int)
-BEGIN
-    SELECT * FROM Empleados WHERE empleadoId = empId;
-END $$
-DELIMITER ;
-
--- EDITAR
-DELIMITER $$
-CREATE PROCEDURE sp_editarEmpleado(empId int,nom varchar(30),ape varchar(30),sue decimal(10,2),he time,hs time,carId int,encId int)
-BEGIN
-    UPDATE Empleados
-    SET
-        nombreEmpleado = nom,
-        apellidoEmpleado = ape,
-        sueldo = sue,
-        horaEntrada = he,
-        horaSalida = hs,
-        cargoId = carId,
-        encargadoId = encId
-    WHERE empleadoId = empId;
-END $$
-DELIMITER ;
-
--- ASIGNAR ENCARGADO
-DELIMITER $$
-CREATE PROCEDURE sp_asignarEncargado(empId int, encId int)
-BEGIN
-	UPDATE empleados 
-		set encargadoId = encId
-			where empleadoId = empId;
-END $$
-DELIMITER ;
-
--- *********************** CRUD Facturas ************************** --
--- AGREGAR
-DELIMITER $$
-CREATE PROCEDURE sp_agregarFactura(cliId int,empId int)
-BEGIN
-    INSERT INTO Facturas(fecha, hora, clienteId, empleadoId)
-    VALUES (DATE(NOW()), TIME(NOW()), cliId, empId);
-END $$
-DELIMITER ;
-
--- LISTAR
-DELIMITER $$
-CREATE PROCEDURE sp_listarFacturas()
-BEGIN
-    SELECT * FROM Facturas;
-END $$
-DELIMITER ;
-
--- ELIMINAR
-DELIMITER $$
-CREATE PROCEDURE sp_eliminarFactura(facId int)
-BEGIN
-    DELETE FROM Facturas WHERE facturaId = facId;
-END $$
-DELIMITER ;
-
--- BUSCAR
-DELIMITER $$
-CREATE PROCEDURE sp_buscarFactura(facId int)
-BEGIN
-    SELECT * FROM Facturas WHERE facturaId = facId;
-END $$
-DELIMITER ;
-
--- EDITAR
-DELIMITER $$
-CREATE PROCEDURE sp_editarFactura(facId int,fec date,hor time,cliId int,empId int,tot decimal(10,2))
-BEGIN
-    UPDATE Facturas
-    SET
-        fecha = fec,
-        hora = hor,
-        clienteId = cliId,
-        empleadoId = empId,
-        total = tot
-    WHERE facturaId = facId;
-END $$
-DELIMITER ;
-
--- *********************** CRUD DetalleFactura ************************** --
--- AGREGAR
-DELIMITER $$
-CREATE PROCEDURE sp_agregarDetalleFactura(facId int,prodId int)
-BEGIN
-    INSERT INTO DetalleFactura(facturaId, productoId)
-    VALUES (facId, prodId);
-END $$
-DELIMITER ;
-
--- LISTAR
-DELIMITER $$
-CREATE PROCEDURE sp_listarDetalleFacturas()
-BEGIN
-    SELECT * FROM DetalleFactura;
-END $$
-DELIMITER ;
-
--- ELIMINAR
-DELIMITER $$
-CREATE PROCEDURE sp_eliminarDetalleFactura(detFacId int)
-BEGIN
-    DELETE FROM DetalleFactura WHERE detalleFacturaId = detFacId;
-END $$
-DELIMITER ;
-
--- BUSCAR
-DELIMITER $$
-CREATE PROCEDURE sp_buscarDetalleFactura(detFacId int)
-BEGIN
-    SELECT * FROM DetalleFactura WHERE detalleFacturaId = detFacId;
-END $$
-DELIMITER ;
-
--- EDITAR
-DELIMITER $$
-CREATE PROCEDURE sp_editarDetalleFactura(detFacId int,facId int,prodId int)
-BEGIN
-    UPDATE DetalleFactura
-    SET
-        facturaId = facId,
-        productoId = prodId
-    WHERE detalleFacturaId = detFacId;
-END $$
-DELIMITER ;
-
--- *********************** CRUD Compras ************************** --
--- AGREGAR
+-- *********** Compras ************** --
 DELIMITER $$
 CREATE PROCEDURE sp_agregarCompra(fec date,tot decimal(10,2))
 BEGIN
@@ -438,7 +438,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- LISTAR
 DELIMITER $$
 CREATE PROCEDURE sp_listarCompras()
 BEGIN
@@ -446,7 +445,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- ELIMINAR
 DELIMITER $$
 CREATE PROCEDURE sp_eliminarCompra(comId int)
 BEGIN
@@ -454,7 +452,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- BUSCAR
 DELIMITER $$
 CREATE PROCEDURE sp_buscarCompra(comId int)
 BEGIN
@@ -462,7 +459,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- EDITAR
 DELIMITER $$
 CREATE PROCEDURE sp_editarCompra(comId int,fec date,tot decimal(10,2))
 BEGIN
@@ -475,8 +471,7 @@ END $$
 DELIMITER ;
 
 
--- *********************** CRUD DetalleCompras ************************** --
--- AGREGAR
+-- *********** DetalleProductos ********** --
 DELIMITER $$
 CREATE PROCEDURE sp_agregarDetalleCompra(cant int,prodId int,comId int)
 BEGIN
@@ -485,7 +480,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- LISTAR
 DELIMITER $$
 CREATE PROCEDURE sp_listarDetalleCompras()
 BEGIN
@@ -493,7 +487,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- ELIMINAR
 DELIMITER $$
 CREATE PROCEDURE sp_eliminarDetalleCompra(detComId int)
 BEGIN
@@ -501,7 +494,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- BUSCAR
 DELIMITER $$
 CREATE PROCEDURE sp_buscarDetalleCompra(detComId int)
 BEGIN
@@ -509,7 +501,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- EDITAR
 DELIMITER $$
 CREATE PROCEDURE sp_editarDetalleCompra(detComId int,cant int,prodId int,comId int)
 BEGIN
@@ -522,9 +513,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-
--- *********************** CRUD Promociones ************************** --
--- AGREGAR
+-- ***************** Promociones ****************** --
 DELIMITER $$
 CREATE PROCEDURE sp_agregarPromocion(pre decimal(10,2),des varchar(100),fecIni date,fecFin date,prodId int)
 BEGIN
@@ -533,15 +522,15 @@ BEGIN
 END $$
 DELIMITER ;
 
--- LISTAR
 DELIMITER $$
 CREATE PROCEDURE sp_listarPromociones()
 BEGIN
-    SELECT * FROM Promociones;
+    select PS.promocionId, PS.precioPromocion, PS.descripcionPromocion, PS.fechaInicio, PS.fechaFinalizacion,  
+			P.nombreProducto from Promociones PS
+            join Productos P on PS.productoId = P.productoId;
 END $$
 DELIMITER ;
 
--- ELIMINAR
 DELIMITER $$
 CREATE PROCEDURE sp_eliminarPromocion(promId int)
 BEGIN
@@ -549,7 +538,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- BUSCAR
 DELIMITER $$
 CREATE PROCEDURE sp_buscarPromocion(promId int)
 BEGIN
@@ -557,7 +545,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- EDITAR
 DELIMITER $$
 CREATE PROCEDURE sp_editarPromocion(promId int,pre decimal(10,2),des varchar(100),fecIni date,fecFin date,prodId int)
 BEGIN
@@ -572,59 +559,54 @@ BEGIN
 END $$
 DELIMITER ;
 
-
--- *********************** CRUD TicketSoporte ************************** --
--- AGREGAR
+-- ******************* DetalleFacturas ************* --
 DELIMITER $$
-CREATE PROCEDURE sp_agregarTicketSoporte(des varchar(250), cliId int, facId int)
+CREATE PROCEDURE sp_agregarDetalleFactura(facId int,prodId int)
 BEGIN
-    INSERT INTO TicketSoporte(descripcionTicket, estatus, clienteId, facturaId)
-    VALUES (des, 'Recién Creado', cliId, facId);
+    INSERT INTO DetalleFactura(facturaId, productoId)
+    VALUES (facId, prodId);
 END $$
 DELIMITER ;
 
--- LISTAR
 DELIMITER $$
-CREATE PROCEDURE sp_listarTicketsSoporte()
+CREATE PROCEDURE sp_listarDetalleFacturas()
 BEGIN
-    select TS.ticketSoporteId, TS.descripcionTicket, TS.estatus,
-			CONCAT('Id: ', C.clienteId, ' | ', C.nombre, ' ', C.apellido) AS 'cliente',
-            TS.facturaId from TicketSoporte TS
-    join Clientes C on TS.clienteId = C.clienteId;
+    SELECT * FROM DetalleFactura;
 END $$
 DELIMITER ;
 
-call sp_listarTicketsSoporte();
-
--- ELIMINAR
 DELIMITER $$
-CREATE PROCEDURE sp_eliminarTicketSoporte(ticSopId int)
+CREATE PROCEDURE sp_eliminarDetalleFactura(detFacId int)
 BEGIN
-    DELETE FROM TicketSoporte WHERE ticketSoporteId = ticSopId;
+    DELETE FROM DetalleFactura WHERE detalleFacturaId = detFacId;
 END $$
 DELIMITER ;
 
--- BUSCAR
 DELIMITER $$
-CREATE PROCEDURE sp_buscarTicketSoporte(ticSopId int)
+CREATE PROCEDURE sp_buscarDetalleFactura(detFacId int)
 BEGIN
-    SELECT * FROM TicketSoporte WHERE ticketSoporteId = ticSopId;
+    SELECT * FROM DetalleFactura WHERE detalleFacturaId = detFacId;
 END $$
 DELIMITER ;
 
--- EDITAR
 DELIMITER $$
-CREATE PROCEDURE sp_editarTicketSoporte(ticSopId int,des varchar(250),est varchar(30),cliId int,facId int)
+CREATE PROCEDURE sp_editarDetalleFactura(detFacId int,facId int,prodId int)
 BEGIN
-    UPDATE TicketSoporte
+    UPDATE DetalleFactura
     SET
-        descripcionTicket = des,
-        estatus = est,
-        clienteId = cliId,
-        facturaId = facId
-    WHERE ticketSoporteId = ticSopId;
+        facturaId = facId,
+        productoId = prodId
+    WHERE detalleFacturaId = detFacId;
 END $$
 DELIMITER ;
 
 
-call sp_listarTicketsSoporte;
+-- ***************** Asignar Encargado **********************
+DELIMITER $$
+CREATE PROCEDURE sp_asignarEncargado(empId int, encId int)
+BEGIN
+	UPDATE Empleados 
+		set encargadoId = encId
+			where empleadoId = empId;
+END $$
+DELIMITER ;

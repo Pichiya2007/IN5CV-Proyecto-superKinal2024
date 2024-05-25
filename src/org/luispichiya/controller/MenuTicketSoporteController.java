@@ -26,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.luispichiya.dao.Conexion;
 import org.luispichiya.model.Cliente;
+import org.luispichiya.model.Factura;
 import org.luispichiya.model.TicketSoporte;
 import org.luispichiya.system.Main;
 
@@ -43,7 +44,7 @@ public class MenuTicketSoporteController implements Initializable {
     
     
     @FXML
-    ComboBox cmbEstatus, cmbClientes;
+    ComboBox cmbEstatus, cmbClientes, cmbFacturas;
     @FXML
     Button btnRegresar, btnGuardar, btnVaciar;
     @FXML
@@ -158,6 +159,46 @@ public class MenuTicketSoporteController implements Initializable {
         return FXCollections.observableList(tickets);
     }
     
+    public ObservableList<Factura> listarFactura(){
+        ArrayList<Factura> factura = new ArrayList<>();
+        
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_listarFacturas()";
+            statement = conexion.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                int facturaId = resultSet.getInt("facturaId");
+                String fecha = resultSet.getString("fecha");
+                String hora = resultSet.getString("hora");
+                String cliente = resultSet.getString("cliente");
+                String empleado = resultSet.getString("empleado");
+                Double total = resultSet.getDouble("total");
+                
+                factura.add(new Factura(facturaId,fecha,hora,cliente,empleado,total));
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(resultSet != null){
+                    resultSet.close();
+                }
+                if(statement != null){
+                    statement.close();
+                }
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return FXCollections.observableList(factura);
+    }
+    
     public ObservableList<Cliente> listarClientes(){
         ArrayList<Cliente> clientes = new ArrayList<>();
         
@@ -205,7 +246,7 @@ public class MenuTicketSoporteController implements Initializable {
             statement = conexion.prepareStatement(sql);
             statement.setString(1, taDescripcion.getText());
             statement.setInt(2, ((Cliente)cmbClientes.getSelectionModel().getSelectedItem()).getClienteId());
-            statement.setInt(3, 1);
+            statement.setInt(3, ((Factura)cmbFacturas.getSelectionModel().getSelectedItem()).getFacturaId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -257,6 +298,7 @@ public class MenuTicketSoporteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarCmbEstatus();
         cmbClientes.setItems(listarClientes());
+        cmbFacturas.setItems(listarFactura());
         cargarDatos();
     }    
 

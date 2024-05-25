@@ -100,7 +100,7 @@ public class MenuClientesController implements Initializable {
         
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "CALL sp_ListarClientes();";
+            String sql = "CALL sp_listarClientes();";
             statement = conexion.prepareStatement(sql);
             resultSet = statement.executeQuery();
             
@@ -138,7 +138,7 @@ public class MenuClientesController implements Initializable {
     public void eliminarCliente(int cliId){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "CALL sp_EliminarClientes(?);";
+            String sql = "CALL sp_eliminarCliente(?);";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, cliId);
             statement.execute();
@@ -162,7 +162,7 @@ public class MenuClientesController implements Initializable {
         Cliente cliente = null;      
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "CALL sp_BuscarCliente(?);";
+            String sql = "CALL sp_buscarCliente(?);";
             statement = conexion.prepareStatement(sql);
             statement.setInt(1, Integer.parseInt(tfClienteId.getText()));
             resultSet = statement.executeQuery();
