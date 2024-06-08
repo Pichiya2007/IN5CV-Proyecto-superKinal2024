@@ -1,6 +1,21 @@
 use superKinalDB;
 -- Agregar Usuario
 
+select * from DetalleFactura DF
+join Productos P on DF.productoId = P.productoId
+join Facturas F on DF.facturaId = F.facturaId
+join Clientes C on F.clienteId = C.clienteId
+where F.facturaId = DF.facturaId;
+
+DELIMITER $$
+create procedure sp_asignarTotal(in tot decimal(10,2), in facId int)
+BEGIN
+	update Facturas
+		set total = tot
+			where facturaId = facId;
+END $$
+DELIMITER ;
+
 DELIMITER $$
 CREATE PROCEDURE sp_agregarUsuario(us varchar(30), con varchar(100), nivAccId int, empId int)
 	BEGIN
@@ -386,12 +401,12 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE sp_listarProductos()
 BEGIN
-    SELECT P.productoId, P.nombreProducto, P.descripcionProducto, P.cantidadStock, P.precioVentaUnitario, P.precioVentaMayor,
-        CONCAT('Id:', D.distribuidorId,'','Nombre:',D.nombreDistribuidor,'')AS 'Distribuidor',
-		CONCAT('Id:', C.categoriaProductoId,'','Nombre:',C.nombreCategoria,'')AS 'Categoria'
+     SELECT P.productoId, P.nombreProducto, P.descripcionProducto, P.cantidadStock, P.precioVentaUnitario, P.precioVentaMayor, P.precioCompra, P.imagenProducto,
+        CONCAT('Id: ', D.distribuidorId, '| ',D.nombreDistribuidor)AS 'Distribuidor',
+		CONCAT('Id: ', C.categoriaProductosId, '| ',C.nombreCategoria)AS 'Categoria'
 		FROM Productos P
         join Distribuidores D on P.distribuidorId = D.distribuidorId
-		join CategoriaProductos C on P.categoriaProductoId = C.categoriaProductoId;
+		join CategoriaProductos C on P.categoriaProductosId = C.categoriaProductosId;
 END $$
 DELIMITER ;
 
@@ -404,9 +419,11 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE PROCEDURE sp_buscarProducto(prodId int)
+CREATE PROCEDURE sp_buscarProducto(proId int)
 BEGIN
-    SELECT * FROM Productos WHERE productoId = prodId;
+    SELECT P.productoId, P.nombreProducto, P.descripcionProductos, P.cantidadStock, P.precioVentaUnitario, P.precioVentaMayor, P.precioCompra, P.imagenProducto
+		FROM Productos P
+		WHERE productoId = proId;
 END $$
 DELIMITER ;
 
@@ -568,10 +585,17 @@ BEGIN
 END $$
 DELIMITER ;
 
+call sp_agregarDetalleFactura(1, 1);
+
 DELIMITER $$
 CREATE PROCEDURE sp_listarDetalleFacturas()
 BEGIN
-    SELECT * FROM DetalleFactura;
+    SELECT  DF.detalleFacturaId,
+			CONCAT('Id: ', F.facturaId, ' | fecha: ' , F.fecha, ' ',F.hora) AS 'factura',
+            CONCAT('Id: ',P.productoId, '| ', P.nombreProducto)AS 'producto'
+			FROM DetalleFactura DF
+			JOIN Facturas F on DF.facturaId = F.facturaId
+			JOIN Productos P on DF.productoId = P.productoId;
 END $$
 DELIMITER ;
 

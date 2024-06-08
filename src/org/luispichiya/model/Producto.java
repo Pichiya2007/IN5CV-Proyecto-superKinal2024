@@ -12,6 +12,9 @@ import java.sql.Blob;
  * @author Luis Pichiya
  */
 public class Producto {
+
+    public Producto() {
+    }
     
     private int productoId;
     private String nombreProducto;
@@ -24,22 +27,8 @@ public class Producto {
     private int distribuidorId;
     private String distribuidor;
     private int categoriaProductoId;
-    private String categoriaProducto;
-
-    public Producto() {
-    }
+    private String categoriaProducto; 
     
-    public Producto(int productoId, String nombreProducto, String descripcionProductos, int cantidadStock, double precioVentaUnitario, double precioVentaMayor, double precioCompra, String distribuidor, String categoriaProducto) {
-        this.productoId = productoId;
-        this.nombreProducto = nombreProducto;
-        this.descripcionProductos = descripcionProductos;
-        this.cantidadStock = cantidadStock;
-        this.precioVentaUnitario = precioVentaUnitario;
-        this.precioVentaMayor = precioVentaMayor;
-        this.precioCompra = precioCompra;
-        this.distribuidor = distribuidor;
-        this.categoriaProducto = categoriaProducto;
-    }
 
     public Producto(int productoId, String nombreProducto, String descripcionProductos, int cantidadStock, double precioVentaUnitario, double precioVentaMayor, String distribuidor, String categoriaProducto) {
         this.productoId = productoId;
@@ -48,6 +37,18 @@ public class Producto {
         this.cantidadStock = cantidadStock;
         this.precioVentaUnitario = precioVentaUnitario;
         this.precioVentaMayor = precioVentaMayor;
+        this.distribuidor = distribuidor;
+        this.categoriaProducto = categoriaProducto;
+    }
+
+    public Producto(int productoId, String nombreProducto, String descripcionProductos, int cantidadStock, double precioVentaUnitario, double precioVentaMayor, double precioCompra, String distribuidor, String categoriaProducto) {
+        this.productoId = productoId;
+        this.nombreProducto = nombreProducto;
+        this.descripcionProductos = descripcionProductos;
+        this.cantidadStock = cantidadStock;
+        this.precioVentaUnitario = precioVentaUnitario;
+        this.precioVentaMayor = precioVentaMayor;
+        this.precioCompra = precioCompra;
         this.distribuidor = distribuidor;
         this.categoriaProducto = categoriaProducto;
     }
@@ -85,7 +86,31 @@ public class Producto {
         this.precioCompra = precioCompra;
         this.imagenProducto = imagenProducto;
     }
-    
+
+    public Producto(int productoId, String nombreProducto, String descripcionProductos, int cantidadStock, double precioVentaUnitario, double precioVentaMayor, double precioCompra, Blob imagenProducto, String distribuidor, String categoriaProducto) {
+        this.productoId = productoId;
+        this.nombreProducto = nombreProducto;
+        this.descripcionProductos = descripcionProductos;
+        this.cantidadStock = cantidadStock;
+        this.precioVentaUnitario = precioVentaUnitario;
+        this.precioVentaMayor = precioVentaMayor;
+        this.precioCompra = precioCompra;
+        this.imagenProducto = imagenProducto;
+        this.distribuidor = distribuidor;
+        this.categoriaProducto = categoriaProducto;
+    }
+
+    public Producto(int productoId, String nombreProducto, String descripcionProductos, int cantidadStock, double precioVentaUnitario, double precioVentaMayor, double precioCompra, Blob imagenProducto) {
+        this.productoId = productoId;
+        this.nombreProducto = nombreProducto;
+        this.descripcionProductos = descripcionProductos;
+        this.cantidadStock = cantidadStock;
+        this.precioVentaUnitario = precioVentaUnitario;
+        this.precioVentaMayor = precioVentaMayor;
+        this.precioCompra = precioCompra;
+        this.imagenProducto = imagenProducto;
+    }
+   
     public int getProductoId() {
         return productoId;
     }
@@ -181,9 +206,9 @@ public class Producto {
     public void setCantidadStock(int cantidadStock) {
         this.cantidadStock = cantidadStock;
     }
-  
+
     @Override
     public String toString() {
-        return "Producto{ " + nombreProducto + " } Precio{ " + precioVentaUnitario +" }";
+        return "Id: " + productoId + "| " + nombreProducto ;
     }
 }

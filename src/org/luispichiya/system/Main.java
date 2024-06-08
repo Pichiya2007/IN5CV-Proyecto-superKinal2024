@@ -28,7 +28,7 @@ import org.luispichiya.controller.MenuFacturaController;
 import org.luispichiya.controller.MenuPrincipalController;
 import org.luispichiya.controller.MenuPromocionController;
 import org.luispichiya.controller.MenuTicketSoporteController;
-import org.luispichiya.view.MenuProductoController;
+import org.luispichiya.controller.MenuProductoController;
 
 /**
  *

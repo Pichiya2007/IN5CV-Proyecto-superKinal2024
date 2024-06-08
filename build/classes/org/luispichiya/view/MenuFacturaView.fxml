@@ -20,34 +20,56 @@
          </image>
       </ImageView>
       <TextField fx:id="tfFacturaId" editable="false" layoutX="25.0" layoutY="155.0" prefHeight="25.0" prefWidth="200.0" promptText="Factura ID" />
-      <ComboBox fx:id="cmbClienteId" layoutX="25.0" layoutY="226.0" prefHeight="25.0" prefWidth="200.0" />
-      <ComboBox fx:id="cmbEmpleadoId" layoutX="25.0" layoutY="300.0" prefHeight="25.0" prefWidth="200.0" />
-      <TableView fx:id="tblFacturas" layoutX="333.0" layoutY="192.0" onMouseClicked="#cargarDatosEditar" prefHeight="288.0" prefWidth="622.0">
+      <ComboBox fx:id="cmbClienteId" layoutX="313.0" layoutY="155.0" prefHeight="25.0" prefWidth="200.0" />
+      <ComboBox fx:id="cmbEmpleadoId" layoutX="669.0" layoutY="155.0" prefHeight="25.0" prefWidth="200.0" />
+      <TableView fx:id="tblFacturas" layoutX="292.0" layoutY="206.0" onMouseClicked="#cargarDatosEditar" prefHeight="128.0" prefWidth="520.0">
         <columns>
           <TableColumn fx:id="colFacturaId" prefWidth="75.0" text="facturaId" />
-          <TableColumn fx:id="colFecha" prefWidth="124.0" text="fecha" />
-            <TableColumn fx:id="colHora" prefWidth="129.0" text="hora" />
-            <TableColumn fx:id="colClienteId" prefWidth="108.0" text="clienteId" />
-            <TableColumn fx:id="colEmpleadoId" prefWidth="96.0" text="empleadoId" />
-            <TableColumn fx:id="colTotal" prefWidth="89.0" text="total" />
+          <TableColumn fx:id="colFecha" prefWidth="85.0" text="fecha" />
+            <TableColumn fx:id="colHora" prefWidth="92.0" text="hora" />
+            <TableColumn fx:id="colClienteId" prefWidth="98.0" text="clienteId" />
+            <TableColumn fx:id="colEmpleadoId" prefWidth="82.0" text="empleadoId" />
+            <TableColumn fx:id="colTotal" prefWidth="90.0" text="total" />
         </columns>
       </TableView>
-      <GridPane alignment="CENTER" layoutX="14.0" layoutY="336.0" prefHeight="144.0" prefWidth="290.0">
+      <GridPane alignment="CENTER" layoutX="817.0" layoutY="168.0" prefHeight="104.0" prefWidth="171.0">
          <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Button fx:id="btnGuardar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
-            <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Eliminar" GridPane.columnIndex="1" />
-            <Button fx:id="btnVaciar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Vaciar" GridPane.columnIndex="2" />
+            <Button fx:id="btnVaciar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Vaciar" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="btnRegresar" alignment="CENTER" layoutX="125.0" layoutY="525.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="250.0" text="Regresar" />
+      <Button fx:id="btnVerFactura" alignment="CENTER" layoutX="821.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Ver Factura" />
+      <TextField fx:id="tfDetalleFacturaId" layoutX="25.0" layoutY="220.0" prefHeight="25.0" prefWidth="200.0" promptText="Detalle Factura ID" />
+      <ComboBox fx:id="cmbFactura" layoutX="25.0" layoutY="295.0" prefHeight="25.0" prefWidth="200.0" />
+      <ComboBox fx:id="cmbProducto" layoutX="25.0" layoutY="359.0" prefHeight="25.0" prefWidth="200.0" />
+      <TableView fx:id="tblDetalleFactura" layoutX="292.0" layoutY="359.0" onMouseClicked="#cargarDatosEditarDF" prefHeight="128.0" prefWidth="520.0">
+         <columns>
+            <TableColumn fx:id="colDetalleFacturaId" prefWidth="106.0" text="detalleFacturaId" />
+            <TableColumn fx:id="colFactura" prefWidth="195.0" text="factura" />
+            <TableColumn fx:id="colProducto" prefWidth="218.0" text="producto" />
+         </columns>
+      </TableView>
+      <GridPane alignment="CENTER" layoutX="40.0" layoutY="384.0" prefHeight="104.0" prefWidth="171.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnGuardarDF" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Guardar" />
+            <Button fx:id="btnVaciarDF" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Vaciar" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <TextField fx:id="tfTotal" editable="false" layoutX="819.0" layoutY="362.0" prefHeight="45.0" prefWidth="92.0" promptText="Consumo total" />
    </children>
 </AnchorPane>

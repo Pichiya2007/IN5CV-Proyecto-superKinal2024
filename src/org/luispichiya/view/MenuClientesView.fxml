@@ -41,7 +41,7 @@
             <Button fx:id="btnAgregar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Agregar" />
             <Button fx:id="btnEliminar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Eliminar" GridPane.rowIndex="1" />
             <Button fx:id="btnEditar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Editar" GridPane.columnIndex="1" />
-            <Button fx:id="btnReportar" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Reportar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnReportes" alignment="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Reportes" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="btnRegresar" layoutX="186.0" layoutY="505.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="80.0" text="Regresar" />

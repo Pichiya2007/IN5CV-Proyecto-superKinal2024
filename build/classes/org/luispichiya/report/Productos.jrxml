@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Productos" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a8564aba-c3a0-49d9-99f3-46c08c2f6d5c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="superKinalDB"/>
+	<queryString language="SQL">
+		<![CDATA[select * from Productos P
+join Distribuidores D on P.distribuidorId = D.distribuidorId
+join CategoriaProductos C on P.categoriaProductosId = C.categoriaProductosId]]>
+	</queryString>
+	<field name="productoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="productoId"/>
+		<property name="com.jaspersoft.studio.field.label" value="productoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="nombreProducto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreProducto"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreProducto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="descripcionProducto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descripcionProducto"/>
+		<property name="com.jaspersoft.studio.field.label" value="descripcionProducto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="cantidadStock" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="cantidadStock"/>
+		<property name="com.jaspersoft.studio.field.label" value="cantidadStock"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="precioVentaUnitario" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="precioVentaUnitario"/>
+		<property name="com.jaspersoft.studio.field.label" value="precioVentaUnitario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="precioVentaMayor" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="precioVentaMayor"/>
+		<property name="com.jaspersoft.studio.field.label" value="precioVentaMayor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="precioCompra" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="precioCompra"/>
+		<property name="com.jaspersoft.studio.field.label" value="precioCompra"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="nombreDistribuidor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreDistribuidor"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreDistribuidor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="distribuidores"/>
+	</field>
+	<field name="nombreCategoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombreCategoria"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreCategoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categoriaproductos"/>
+	</field>
+	<group name="productoId">
+		<groupExpression><![CDATA[$F{productoId}]]></groupExpression>
+	</group>
+	<group name="nombreProducto">
+		<groupExpression><![CDATA[$F{nombreProducto}]]></groupExpression>
+	</group>
+	<group name="descripcionProducto">
+		<groupExpression><![CDATA[$F{descripcionProducto}]]></groupExpression>
+	</group>
+	<group name="cantidadStock">
+		<groupExpression><![CDATA[$F{cantidadStock}]]></groupExpression>
+	</group>
+	<group name="precioVentaUnitario">
+		<groupExpression><![CDATA[$F{precioVentaUnitario}]]></groupExpression>
+	</group>
+	<group name="precioVentaMayor">
+		<groupExpression><![CDATA[$F{precioVentaMayor}]]></groupExpression>
+	</group>
+	<group name="precioCompra">
+		<groupExpression><![CDATA[$F{precioCompra}]]></groupExpression>
+	</group>
+	<group name="nombreDistribuidor">
+		<groupExpression><![CDATA[$F{nombreDistribuidor}]]></groupExpression>
+	</group>
+	<group name="nombreCategoria">
+		<groupExpression><![CDATA[$F{nombreCategoria}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="131" splitType="Stretch">
+			<staticText>
+				<reportElement x="216" y="30" width="320" height="69" uuid="e7cdc97e-b74c-4fe8-bda6-af13d9b16bfe"/>
+				<textElement>
+					<font size="50"/>
+				</textElement>
+				<text><![CDATA[PRODUCTOS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="600" y="0" width="129" height="131" uuid="974b34b9-5007-4aa0-84b9-ee8ca1a79e80"/>
+				<imageExpression><![CDATA["C:/Users/Luis Pichiya/Documents/NetBeansProjects/Repositorio Git/IN5CV-Proyecto-superKinal2024/src/org/luispichiya/image/icon.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="0" width="59" height="30" uuid="a5b7ab7c-695e-400d-8a76-a610e4832755"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="0" width="80" height="30" uuid="bc982c88-23ed-495c-9907-18e4b4175de3"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="60" height="30" uuid="a9104a70-f0eb-44f7-95e0-d3e0e3b4434d"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="99" height="30" uuid="7a093dc2-423f-47d1-8f21-2f0a305e8d9a"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Precio Unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="90" height="30" uuid="fb87417f-1081-44b5-9698-ecf5e6d14069"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Precio Mayor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="50" height="30" uuid="7b996582-97f8-4add-ac91-0bc56bcea3f2"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="0" width="80" height="30" uuid="e337d75e-ba9f-4c85-b2e3-59673ed2673f"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Distribuidor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="0" width="70" height="30" uuid="644a79e9-6aa7-4265-a2f5-03b4d3d6a086"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Categoría]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="84" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="40" width="70" height="30" uuid="799f0fb6-4702-448e-8d7a-e369c360e5b6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="446b37ed-e10f-4e92-91b2-a9eb408665e9"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombreProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-20" y="40" width="80" height="30" uuid="9b87a396-caec-49de-8fe9-86a1bc4f5f2c"/>
+				<textFieldExpression><![CDATA["ID: " + $F{productoId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="40" width="100" height="30" uuid="222aae61-79b6-4da9-9274-e3535dc789d3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5abe9fa5-6477-42fd-a786-8ada8b1656d7"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{descripcionProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="40" width="100" height="30" uuid="90783438-0c07-49d3-a530-8e209b1cfa8d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="89b046a1-399b-4066-8172-44e64732ff07"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cantidadStock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="40" width="100" height="30" uuid="6ee269ad-f9b2-45bb-98be-b79b3cea6381">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7cdd3655-d7d4-44fa-983b-7f77fb0637ca"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{precioVentaUnitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="40" width="100" height="30" uuid="4547fa5c-064a-44d1-a57e-8a85992ee423">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fd38697b-d29a-4f89-a4e8-132a7cb775a7"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{precioVentaMayor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="40" width="80" height="30" uuid="3897cfef-5e57-48bd-9bf9-c00a5b0801dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4fb1f4c0-5481-42a8-a92e-e1f53f2c894e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{precioCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="40" width="100" height="30" uuid="d7d1dd75-317b-4f4a-baa5-b8b8b71aa12d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="17e9813b-5412-4de7-aff0-5f726db87f1a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombreDistribuidor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="40" width="100" height="30" uuid="b421d69d-3eb9-4352-8041-3fdd0492876e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a2e53cc4-d650-4132-baa9-5ee750b66ace"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombreCategoria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
